@@ -10,20 +10,15 @@
       <a class="insight navbar-brand" href="/"></a>
     </div>
     <div class="navbar-collapse collapse" collapse="$root.isCollapsed">
-      <ul class="nav navbar-nav">
+      <ul ng-show="$root.title != 'Home'" class="nav navbar-nav">
         <li data-ng-repeat="item in menu" ui-route="/{{item.link}}" data-ng-class="{active: $uiRoute}">
           <a href="/{{item.link}}">{{item.title}}</a>
         </li>
       </ul>
-      <form id="search-form" data-ng-controller="SearchController" class="navbar-form navbar-left hidden-xs" role="search" data-ng-submit="search()">
-        <div class="form-group" data-ng-class="{'has-error': badQuery}">
-          <input id="search" type="text" class="form-control" data-ng-model="q" data-ng-class="{'loading': loading}"  placeholder="Search for a block, transaction or address" data-ng-submit="search()">
-        </div>
-        <div class="no_matching text-danger" data-ng-show="badQuery">No matching records found!</div>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
+	<ul class="nav navbar-nav navbar-right">
         <li>
       <div class="status" data-ng-controller="StatusController">
+	 <strong class="pull-left"> Sync &nbsp;</strong>
         <div data-ng-init="getSync()" class="pull-left">
           <span class="t text-danger"  data-ng-show="sync.error" tooltip="{{sync.error}}" tooltip-placement="bottom"> 
               <span  class="glyphicon glyphicon-warning-sign"></span>
@@ -35,18 +30,26 @@
           </span>
           <span class="glyphicon glyphicon-ok" tooltip="Historic sync finished" tooltip-placement="bottom" data-ng-show="sync.status==='finished'"> </span>
         </div>
-        &nbsp; &middot;
-        <span data-ng-init="getStatus('Info')">
+        <span>&nbsp;</span>
+	<span ng-show="$root.title != 'Home'">&middot;</span>
+        <span ng-show="$root.title != 'Home'" data-ng-init="getStatus('Info')">
           <strong>Conn</strong> {{info.connections}}
-        </span> &middot;
-        <strong>Height</strong> {{totalBlocks || info.blocks}}
+        </span> <span ng-show="$root.title != 'Home'">&middot;</span>
+        <span ng-show="$root.title != 'Home'"><strong>Height</strong> {{totalBlocks || info.blocks}}</span>
       </div>
       </li>
-      <li>
+      <li ng-show="$root.title != 'Home'">
         <a href="#" data-ng-click="openScannerModal()"><span class="glyphicon glyphicon-qrcode"></span> Scan</a>
       </li>
       <li class="dropdown" data-ng-controller="CurrencyController" data-ng-include="'/views/includes/currency.html'"></li>
       </ul>
+      <form id="search-form" data-ng-controller="SearchController" class="navbar-form navbar-right hidden-xs" role="search" data-ng-submit="search()">
+        <div class="form-group" data-ng-class="{'has-error': badQuery}">
+          <input ng-show="$root.title == 'Home'" id="search" size="40" type="text" class="form-control" data-ng-model="q" data-ng-class="{'loading': loading}"  placeholder="Search for a block, transaction or address" data-ng-submit="search()">
+	<input ng-show="$root.title != 'Home'" id="search" size="25" type="text" class="form-control" data-ng-model="q" data-ng-class="{'loading': loading}"  placeholder="Search for a block, transaction or address" data-ng-submit="search()">
+        </div>
+        <div class="no_matching text-danger" data-ng-show="badQuery">No matching records found!</div>
+      </form>
     </div>
   </div>
 </div>

@@ -5,9 +5,63 @@
 <section data-ng-controller="IndexController" data-ng-init="index()">
   <div class="container">
     <div id="home" class="row">
-      <div class="col-xs-12 col-md-8">
+      
+      <div class="col-xs-12 col-md-4 home-right-container pull-right">
+	<div data-ng-controller="HeaderController">
 
-        <div data-ng-include src="'/views/includes/search.html'"></div> 
+
+
+		<a href="/{{item.link}}" data-ng-repeat="item in menu" ui-route="/{{item.link}}" data-ng-class="{active: $uiRoute}" class="home-right-button pull-left">
+			{{item.title}}
+		</a>
+	</div>
+	<div>
+		<!--Issue #1-->
+		<a data-ng-click="openScannerModal()" class="home-right-tile pull-left">
+			<div class="tile-left-container tile-icon tile-icon-scan">
+			</div>
+			<div class="tile-right-container">
+				<div class="tile-title">
+					QR Code
+				</div>
+				<div class="tile-value">
+				        Scan
+				</div>
+			</div>
+		</a>
+
+				
+		<div class="home-right-tile-info pull-left">
+			<div class="tile-info-left-container tile-info-icon tile-info-icon-plug">
+			</div>
+			<div class="tile-info-right-container">
+				<div class="tile-info-title">
+					CONNECTIONS
+				</div>
+				<div data-ng-init="getStatus('Info')" class="tile-info-value">
+					 44 <!--Issue #2 Display live connections count-->
+				</div>
+			</div>
+		</div>
+		<div class="home-right-tile-info pull-left">
+			<div class="tile-info-left-container tile-info-icon tile-info-icon-data">
+			</div>
+			<div class="tile-info-right-container">
+				<div class="tile-info-title">
+					HEIGHT
+				</div>
+				<div class="tile-info-value">
+					306758 <!--Issue #2 Display live blocks count-->
+				</div>
+			</div>
+		</div>
+	</div>
+
+      </div> <!-- END OF COL-3 -->
+
+<div class="col-xs-12 col-md-8 pull-right">
+
+        <div data-ng-include src="'/views/includes/search.html'"></div>
 
         <h1>Latest Blocks</h1>
         <table class="table table-hover table-striped" style="table-layout: fixed">
@@ -21,7 +75,7 @@
             </tr>
           </thead>
           <tbody>
-          <tr data-ng-show="!blocks.length"><td colspan="4">Waiting for blocks...</td></tr>
+          <tr data-ng-show="!blocks.length"><td colspan="6">Waiting for blocks...</td></tr>
           <tr class="fader" data-ng-repeat='b in blocks'>
             <td>
               <a href="/block/{{b.hash}}">{{b.height}}</a>
@@ -59,9 +113,6 @@
 
       </div>
 
-      <div class="col-xs-12 col-md-4 col-gray">
-        <h2> Search </h2>
-        <p><strong>Powered by insight</strong> , an <a href="http://live.insight.is/" target="_blank">open-source Bitcoin blockchain explorer.</a> Search all transactions on the bitcoin network instantly.      </div> <!-- END OF COL-3 -->
     </div>
   </div>
 </section>
