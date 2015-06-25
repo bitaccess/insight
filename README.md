@@ -6,7 +6,7 @@ front-end and LevelDB for storage.
 
 Check some screenshots and more details at [insight's project homepage](http://insight.is/).
 
-*Insight* project is now splitted in two repositories. One for the [API](https://github.com/bitpay/insight-api) and for the front-end. This repository is for the front-end, which will install the API as a NPM dependency.
+*Insight* project is now split into two repositories. One for the [API](https://github.com/bitpay/insight-api) and for the front-end. This repository is for the front-end, which will install the API as a NPM dependency.
 
 ## Prerequisites
 
@@ -98,7 +98,7 @@ INSIGHT_PUBLIC_PATH=insight/public  grunt
 
 at insight-api's home path (edit the path according your setup).
 
-**also** in the insight-api path. (So you will have to grunt process running, one for insight and one for insight-api).
+**also** in the insight-api path. (So you will have two grunt processes running, one for insight and one for insight-api).
 
 
 ## Multilanguage support
